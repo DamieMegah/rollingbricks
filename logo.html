@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rolling Bricks Logo</title>
+<style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+    .gameBrand{
+        background: #0a0a1a; /* Deep midnight blue */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width:100%;
+        margin: 0;
+        overflow: hidden;
+        font-family: sans-serif;
+        background: url('images/brand.jpg') no-repeat center center/cover;
+    }
+
+    .logo {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* "ROLLING" */
+    .rolling {
+        font-size: 4rem;
+        font-style: italic;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 15px rgba(0,0,0,0.5);
+        animation: slideIn 1.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes slideIn {
+        0% { transform: translateX(-200px) rotate(-10deg); opacity: 0; }
+        100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    }
+
+    /* "BRICKS" */
+    .bricks {
+        font-size: 5rem;
+        font-weight: bold;
+        color: white;
+        font-family: 'Press Start 2P', monospace;
+        position: relative;
+        text-shadow: 0 0 10px #ff6, 0 0 20px #f60;
+        animation: fadeIn 2s ease-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Background tumbling bricks */
+    .brick {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        opacity: 0.7;
+        animation: tumble 4s linear infinite;
+    }
+
+    @keyframes tumble {
+        0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+        20% { opacity: 1; }
+        100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+    }
+    
+    #StartBtn {
+  padding: 0.5rem 3rem;
+  color: #fff;
+  background: linear-gradient(to bottom, goldenrod, gold);
+  font-size: 2rem;
+  font-weight: bolder;
+  border: none;
+  border-radius: 30px;
+  position: absolute; 
+  bottom: -20%;        /* start hidden below */
+  cursor: pointer;
+  transition: bottom 0.5s ease, background 0.3s ease, box-shadow 0.3s ease;;  
+  box-shadow: 0
+  1px 2px 3px rgba(223, 144, 0, 0.4); 
+  overflow:hidden;
+}
+
+ #StartBtn:hover {
+  color: #ddd;
+  background: #888;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+ #StartBtn.active {
+  bottom: 10%; /* move up into view */
+}
+
+
+//Menu Styles
+
+MenuBody {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+#menuBtn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #19a300;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: -300px; /* hidden off-screen */
+  height: 100%;
+  width: 250px;
+  background: #181b09cf;
+  box-shadow: -4px 0 8px rgba(0,0,0,0.3);
+  padding: 20px;
+  transition: right 0.3s ease;
+  color: white;
+  z-index: 1000;
+}
+
+.menu.active {
+  right: 0; /* slide into view */
+}
+
+.menu h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  background: rgba(205,205,205,0.44);
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menu li:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+details summary {
+  list-style: none; /* Remove default marker in some browsers */
+}
+
+details summary::-webkit-details-marker {
+  display: none; /* Remove arrow in Chrome, Safari, Edge */
+}
+
+#volumeControl, input[type=range]{
+ webkit-appearance: none; /* Remove default styling */
+  width: 100px;
+  height: 6px;
+  background: gray;
+  border-radius: 5px;
+  color:white;
+}
+
+</style>
+</head>
+<body>
+
+<div class="gameBrand">
+  <div class="logo">
+    <div class="rolling">ROLLING</div>
+    <div class="bricks">BRICKS</div>
+  </div>
+    <button id="StartBtn">Start Game</button>
+</div>
+
+<div class="MenuBody">
+    
+<button id="menuBtn">⚙ Set Up</button>
+
+<div id="menu" class="menu">
+  <h2>Settings</h2>
+  
+  
+  <ul>
+    <li><details>
+            <summary>Sound</summary>
+            <button id="soundToggle">ON</button>
+           <br> Music Volume
+            <input type="range" id="volumeControl"
+             min="0" max="1" step="0.01" value="1">
+
+        </details>
+         
+    <li><details><summary>HighScore</summary>
+         <ol class="content">
+             <li id="highscore">1000</li>
+         </ol> </details></li>
+    <li><details><summary>Instruction</summary>
+        <div class="content">
+         <p >Use the left and right buttons to move blocks to sides, <br> Use the '⤾' button to turn blocks into prefered alignment. beat the highscore </p></div></details>
+</li>
+    <li><details>
+        <summary>Credits</summary>
+       <p style="text-align:center; font-family:sans-serif; font-size:14px; color:#fff;">
+  <strong>This game was designed and developed by <span style="color:#ffd700;">DamiMegah</span>.</strong><br>
+  &copy; 2025 DamiMegah — All rights reserved.<br>
+  <em>Music Credits:</em> Eminem, 2Baba, Adele, Davido, Mayorkun, Ed Sheeran, Fireboy DML, Ayra Starr, Rema, and others.
+</p> 
+    </details></li>
+  </ul>
+  <small style="font-style:italic">Powered by <span style="color:red;">E</span>-Console</small>
+</div>
+
+</div>
+
+
+
+
+
+
+<script>
+    // Brick colors from your theme
+    const colors = ["lime", "cyan", "orange", "magenta", "red", "yellow"];
+    const logo = document.querySelector('.logo');
+
+    // Create falling bricks
+    for (let i = 0; i < 15; i++) {
+        let brick = document.createElement('div');
+        brick.classList.add('brick');
+        brick.style.background = colors[Math.floor(Math.random() * colors.length)];
+        brick.style.left = `${Math.random() * 300 - 150}px`; // spread around logo
+        brick.style.top = `${Math.random() * -200}px`;
+        brick.style.animationDelay = `${Math.random() * 2}s`;
+        logo.appendChild(brick);
+    }
+    
+  //Start Button 
+  
+ document.addEventListener('DOMContentLoaded', () => {
+  const button = document.getElementById('StartBtn');
+  if (button) {
+    setTimeout(() => {
+      button.classList.add('active');
+    }, 1500); // after 1.5s
+  }
+}); 
+
+
+
+//Menu Logic Script
+document.getElementById('menuBtn').addEventListener('click', () => {
+  document.getElementById('menu').classList.toggle('active');
+});
+
+window.addEventListener('dblclick', () => {
+  document.getElementById('menu').classList.toggle('active');
+});
+
+
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  document.getElementById('soundStatus').textContent = soundEnabled ? 'On' : 'Off';
+}
+
+
+  
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Damie-Tetris</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="gamePlay">
+    
+<div id="pauseOverlay">
+    <h2>GAME PAUSED</h2>
+    
+       <button id="resume">Resume</button>
+        <button onclick="location.reload()">Restart</button>
+        <details>
+            <summary>Sound</summary>
+            <button id="soundToggle" onclick="unmute()">OFF</button>
+            <input type="range" id="volumeControl"
+             min="0" max="1" step="0.01" value="1">
+
+        </details>
+        
+         <details><summary>HighScore</summary>
+         <ol class="content">
+             <li id="highscore">0</li>
+         </ol> </details>
+
+        <details><summary>Instruction</summary>
+        <div class="content">
+         <p >Use the left and right buttons to move blocks to sides, <br> Use the '⤾' button to turn blocks into prefered alignment. beat the highscore </p></div></details>
+
+     <small>Music Credits:  
+         <sub>Eminem, 2baba, Adele, Davido, Mayorkun, Ed Sheeran, FireboyDml, Ayra Starr, Rema & others. </sub>
+     </small>   
+    
+  
+  </div>
+
+    <div class="info">
+       <h5>Time:<span id="timer"> 00</span></h5>
+       <h5>Score:<span id="score"> 00</span></h5>
+       <h5>Level:<span id="level">&nbsp;Beginner</span></h5>
+    </div>
+    
+  <canvas id="gameCanvas" width="390" height="555"></canvas>
+<div class="controls">
+     
+     <!-- Level Up Popup -->
+   <div id="levelUpPopup"></div>
+
+    <div class="left">
+     <button class="btn" id="left">&larr;</button>
+     <button class="btn" id="right">&rarr;</button>
+    </div>
+    
+   <div class="right">
+     <button class="btn" id="rotate">&nbsp;⤾&nbsp;</button>
+     <button class="btn" id="down">&darr;</button>
+   </div> 
+</div>
+      <div class="sett">
+         <button id="pause">Pause</button>
+         
+         <div id="pop-container"></div>
+         
+                                          
+      </div>
+      
+      <div id="gameOverOverlay">
+  <div class="gameOverBox">
+    <h1>Game Over</h1>
+    <p>Your Score: <span id="finalScore">0</span></p>
+    <button id="restartBtn">Restart</button>
+  </div>
+ </div>
+</div>
+
+
+<!-- Home page -->
+<div class="gameBrand">
+  <div class="logo">
+    <div class="rolling">ROLLING</div>
+    <div class="bricks">BRICKS</div>
+  </div>
+  
+  <div id="startBtnContainer">
+    <button id="StartBtn">Start Game</button>
+   <button id="menuSoundToggle" onclick="menuSound()">Sound</button>
+  </div>
+</div>
+
+<div class="MenuBody">
+    
+<button id="menuBtn">⚙ Set Up</button>
+
+<div id="menu" class="menu">
+  <h2>Settings</h2>
+  
+  
+  <ul>
+    <li><details>
+            <summary>Sound</summary>
+            
+           <br> Music Volume
+            <input type="range" id="menuVolumeControl"
+             min="0" max="1" step="0.01" value="1">
+
+        </details>
+         
+    <li><details><summary>HighScore</summary>
+         <ol class="content">
+             <li id="menuHighscore">1000</li>
+         </ol> </details></li>
+    <li><details><summary>Instruction</summary>
+        <div class="content">
+         <p >Use the left and right buttons to move blocks to sides, <br> Use the '⤾' button to turn blocks into prefered alignment. Ensure passing workers do not get hit by bricks, beat the highscore.
+         GoodLuck </p></div></details>
+</li>
+    <li><details>
+        <summary>Credits</summary>
+       <p style="text-align:center; font-family:sans-serif; font-size:14px; color:#fff;"> 
+  <strong>This game was designed and developed by <span style="color:#ffd700;">DamiMegah</span>.</strong><br>
+  &copy; 2025 DamiMegah — All rights reserved.<br>
+  <em>Music Credits:</em> Eminem, 2Baba, Adele, Davido, Mayorkun, Ed Sheeran, Fireboy DML, Ayra Starr, Rema, and others.
+</p> 
+    </details></li>
+  </ul>
+  <small class="econ">Powered by : <span style="font-style:italic; color:red;">E</span> - Console</small>
+</div>
+
+</div>
+
+
+<!-- ECONSOLE -->
+<div id="intro">
+  <img src="images/damie.jpg" alt="Intro Image" id="introImage" />
+  <div id="textContainer">
+    <div id="mainText"></div>
+    <div id="tagline">The Virtual Gaming Hub</div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
