@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Damie-Tetris</title>
-  <link rel="stylesheet" href="style.css">
+    <title>Rolling-Bricks</title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon-192.jpg">
+    <meta name="theme-color" content="#000000">
 </head>
 
 <body>
   <div id="gamePlay">
     
-<div id="pauseOverlay">
+  <div id="pauseOverlay">
     <h2>GAME PAUSED</h2>
     
        <button id="resume">Resume</button>
-        <button onclick="location.reload()">Restart</button>
+        <button id="pauseRestartBtn">Restart</button>
         <details>
             <summary>Sound</summary>
             <button id="soundToggle" onclick="unmute()">OFF</button>
@@ -23,7 +31,8 @@
         
          <details><summary>HighScore</summary>
          <ol class="content">
-             <li id="highscore">0</li>
+             <li id="highscore"></li>
+             <button id="resetHighScoreBtn">Clear Highscore</button>
          </ol> </details>
 
         <details><summary>Instruction</summary>
@@ -38,27 +47,28 @@
   </div>
 
     <div class="info">
-       <h5>Time:<span id="timer"> 00</span></h5>
-       <h5>Score:<span id="score"> 00</span></h5>
+       <h5>Time:&nbsp;<span id="timer">&nbsp;00</span></h5>
+       <h5>Score:&nbsp;<span id="score">&nbsp;00</span></h5>
        <h5>Level:<span id="level">&nbsp;Beginner</span></h5>
     </div>
-    
-  <canvas id="gameCanvas" width="390" height="555"></canvas>
-<div class="controls">
-     
-     <!-- Level Up Popup -->
-   <div id="levelUpPopup"></div>
+   <canvas id="gameCanvas" width="390" height="525"></canvas>
+      <div class="controls">
 
-    <div class="left">
-     <button class="btn" id="left">&larr;</button>
-     <button class="btn" id="right">&rarr;</button>
-    </div>
+         <!-- Level Up Popup -->
+         <div id="levelUpPopup"></div>
+
+         <div class="left">
+         <button class="btn" id="left">&larr;</button>
+         <button class="btn" id="right">&rarr;</button>
+        </div>
     
-   <div class="right">
-     <button class="btn" id="rotate">&nbsp;⤾&nbsp;</button>
-     <button class="btn" id="down">&darr;</button>
-   </div> 
-</div>
+        <div class="right">
+         <button class="btn" id="rotate">&nbsp;⤾&nbsp;</button>
+         <button class="btn" id="down">&darr;</button>
+       </div> 
+
+     </div>
+
       <div class="sett">
          <button id="pause">Pause</button>
          
@@ -70,7 +80,7 @@
       <div id="gameOverOverlay">
   <div class="gameOverBox">
     <h1>Game Over</h1>
-    <p>Your Score: <span id="finalScore">0</span></p>
+    <p>Your Score: <span id="finalScore"></span></p>
     <button id="restartBtn">Restart</button>
   </div>
  </div>
@@ -110,7 +120,8 @@
          
     <li><details><summary>HighScore</summary>
          <ol class="content">
-             <li id="menuHighscore">1000</li>
+             <li id="menuHighscore"></li>
+             <button id="clearHighscoreBtn">Clear Highscore</button>
          </ol> </details></li>
     <li><details><summary>Instruction</summary>
         <div class="content">
@@ -140,6 +151,12 @@
     <div id="tagline">The Virtual Gaming Hub</div>
   </div>
 </div>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+</script>
 
 <script src="script.js"></script>
 </body>
